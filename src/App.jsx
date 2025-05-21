@@ -62,7 +62,7 @@ function App() {
   return (
     <>
       <Header />
-
+      <main className='max-w-[1600px] mx-auto pt-[100px] pb-[100px]'>
       {/* Search Input */}
       <input
         type="text"
@@ -89,12 +89,12 @@ function App() {
       </select>
 
       {/* Volunteer Cards */}
-      <div className="grid xl:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-[20px] px-[45px] mt-[100px] mx-auto items-center justify-items-center">
+      <div className="  grid xl:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-[20px] px-[45px] mt-[100px] mx-auto items-center justify-items-center">
         {loading ? (
           <p className="text-center mt-[20%]">Loading...</p>
         ) : volunteers.length === 0 ? (
-          <p className="text-center text-red-500 w-[500px] mt-[20%] h-[60px] bg-red-200 mx-auto flex justify-center items-center rounded-[12px]">
-            No job posted yet
+          <p className="text-center text-red-500 w-[60%] sm:w-[500px] mt-[30px] h-[60px] bg-red-200 mx-auto flex justify-center items-center rounded-[12px]">
+            No job posted 
           </p>
         ) : (
           volunteers.map((volunteer) => (
@@ -115,6 +115,7 @@ function App() {
           ))
         )}
       </div>
+      </main>
     </>
   );
 }
