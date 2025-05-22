@@ -12,7 +12,7 @@ const Home = () => {
       const [searchTerm, setSearchTerm] = useState('');
       const [selectedCategory, setSelectedCategory] = useState('All');
 
-      
+
       //the api url is stored in the .env file
       //the url is imported from the .env file
       //i used mockapi to create a fake api
@@ -34,28 +34,23 @@ const Home = () => {
           })
           .catch((error) => console.error('Fetch error:', error));
       }, []);
-    
-      const handleInputChange = (e) => {
-        const search = e.target.value;
-        setSearchTerm(search);
-        filterVolunteers(search, selectedCategory);
-      };
-    
-      const handleCategoryChange = (e) => {
-        const category = e.target.value;
-        setSelectedCategory(category);
-        filterVolunteers(searchTerm, category);
-      };
-    
+       
+        // Extract unique categories from the fetched data
+       const uniqueCategories = ['All', ...new Set(allVolunteers.map(v => v.category))];
+      
+
+       // Filter volunteers based on search term and selected category
       const filterVolunteers = (search, category) => {
         let filtered = allVolunteers;
-    
+        
+        // Filter by search term
         if (search) {
           filtered = filtered.filter((volunteer) =>
             volunteer.title.toLowerCase().includes(search.toLowerCase())
           );
         }
     
+        // Filter by category
         if (category !== 'All') {
           filtered = filtered.filter((volunteer) =>
             volunteer.category === category
@@ -65,7 +60,23 @@ const Home = () => {
         setVolunteers(filtered);
       };
     
-      const uniqueCategories = ['All', ...new Set(allVolunteers.map(v => v.category))];
+      // Handle input change for search term
+      const handleInputChange = (e) => {
+        const search = e.target.value;
+        setSearchTerm(search);
+        filterVolunteers(search, selectedCategory);
+      };
+    
+      // Handle category change
+      const handleCategoryChange = (e) => {
+        const category = e.target.value;
+        setSelectedCategory(category);
+        filterVolunteers(searchTerm, category);
+      };
+    
+      
+    
+     
     
   return (
     <main className='max-w-[1600px] mx-auto pt-[100px] pb-[100px]'>
